@@ -17,34 +17,21 @@ export default function About() {
     setIsLoaded(true);
   }, []);
 
-  const team = [
+  const pricing = [
     {
-      name: "Dr. Sarah Chen",
-      role: "Chief AI Officer",
-      bio: "Expert in machine learning for healthcare with 10+ years of experience in developing medical diagnostic systems.",
-      image:
-        "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+      title: "IDK",
+      description:
+      "a lot of somethings",
+        },
+    {
+      title: "Usage Limitations in Free Plan",
+      description:
+      "user needs to pay sooner or later",
     },
     {
-      name: "Michael Rodriguez",
-      role: "Head of Engineering",
-      bio: "Pioneered secure distributed systems for healthcare with a focus on privacy-preserving technologies.",
-      image:
-        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    },
-    {
-      name: "Dr. Aisha Patel",
-      role: "Medical Director",
-      bio: "Board-certified radiologist with expertise in AI applications for medical imaging and diagnostics.",
-      image:
-        "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-    },
-    {
-      name: "David Kim",
-      role: "Security Officer",
-      bio: "Former cybersecurity expert for major healthcare systems, specializing in balh blah blah",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+      title: "Contributor Credits",
+      description:
+      "you help us, we give benefits...or something",
     },
   ];
 
@@ -267,50 +254,75 @@ border border-cyan-300/20
         <div className="container mx-auto px-6">
           {/* Glowing header */}
           <div className="text-center max-w-4xl mx-auto mb-20 animate-fade-up">
-            <span className="inline-block bg-cyan-400/10 border border-cyan-400/20 text-cyan-300 px-4 py-1 rounded-full tracking-widest font-['Lilita_One'] text-sm uppercase shadow-md">
-              Our Team
+            <span className="inline-block px-3 py-1 bg-cyan-400/10 border border-cyan-400/20 text-white rounded-full text-sm font-['Lilita_One'] mb-4">
+              Our Pricing Models
             </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mt-6 mb-4 tracking-tight neon-text-glow">
-              The Visionaries Powering MedHive <br></br>(Eta remove kore dis
-              lmaooo)
+            <h2 className="text-4xl md:text-6xl font-['Kagitingan'] mb-6 bg-gradient-to-r from-cyan-400 via-blue-300 to-purple-400 bg-clip-text text-transparent"
+            >
+            Powering Progress Through Thoughtful Pricing
             </h2>
-            <p className="text-gray-400 text-lg">
-              Experts in AI, data privacy, and medical innovation. Together,
-              we're building the next era of federated healthcare intelligence.
+            <p className="text-lg text-white font-['Poppins']">
+            Transparent, adaptable pricing that grows with your mission - thoughtfully structured to sustain both cutting-edge research and real-world impact
             </p>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {team.map((member, index) => (
-              <div
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {pricing.map((item, index) => (
+              <BlurContainer
                 key={index}
-                className="relative group bg-white/5 border border-cyan-500/10 rounded-2xl shadow-[0_0_30px_rgba(0,255,255,0.05)] backdrop-blur-lg overflow-hidden hover:shadow-[0_0_40px_rgba(0,255,255,0.3)] transition-all duration-300 animate-fade-up hover:-translate-y-2"
-                style={{ animationDelay: `${index * 100 + 800}ms` }}
+                intensity="medium"
+                className="relative
+min-h-[340px]
+px-6 py-8
+bg-gray-900 bg-opacity-50
+border border-cyan-500/30
+rounded-2xl
+hover:bg-opacity-70
+hover:shadow-[0_0_20px_rgba(0,255,231,0.6)]
+hover:cursor-pointer
+transition-all duration-300
+flex flex-col items-center justify-between
+text-center space-y-4
+animate-fade-up
+"
+                style={{ animationDelay: `${index * 100 + 600}ms` }}
+                hoverable
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
-                  />
-                  <div className="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                {/* Step Number Circle */}
+                <div
+                  className="
+h-20 w-20
+flex items-center justify-center
+rounded-full
+bg-gray-800 bg-opacity-60
+border border-cyan-500/40
+shadow-[0_0_6px_rgba(0,255,231,0.4)]
+"
+                >
+                  <div
+                    className="
+h-16 w-16
+flex items-center justify-center
+rounded-full
+bg-gradient-to-r from-blue-600 to-cyan-500
+text-white text-2xl font-bold
+border border-cyan-300/20
+"
+                  >
+                    {index + 1}
+                  </div>
                 </div>
 
-                <div className="p-6 text-center">
-                  <h3 className="text-2xl font-['Lilita_One'] text-white mb-1 tracking-wide">
-                    {member.name}
-                  </h3>
-                  <p className="text-cyan-400 uppercase text-sm font-medium tracking-wider mb-3">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-300 text-base font-['Poppins'] leading-relaxed">
-                    {member.bio}
-                  </p>
-                </div>
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl text-cyan-400 font-['Kagitingan']">
+                  {item.title}
+                </h3>
 
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-sm opacity-60 group-hover:opacity-100 transition duration-300" />
-              </div>
+                {/* Description */}
+                <p className="text-white text-base leading-snug px-2 font-['Poppins']">
+                  {item.description}
+                </p>
+              </BlurContainer>
             ))}
           </div>
         </div>

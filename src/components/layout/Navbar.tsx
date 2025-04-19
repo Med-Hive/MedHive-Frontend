@@ -56,12 +56,12 @@ export function Navbar() {
 
   const navLinks = [
     { name: "HOME", path: "/" },
-    { name: "MODEL HUB", path: "/model-hub" },
-    { name: "CONTRIBUTE", path: "/contribute" },
-    { name: "ABOUT", path: "/about" },
     ...(sessionData.sessionData.userprofile?.role === "admin"
       ? [{ name: "DASHBOARD", path: "/admin/dashboard" }]
       : []),
+    { name: "MODEL HUB", path: "/model-hub" },
+    { name: "CONTRIBUTE", path: "/contribute" },
+    { name: "ABOUT", path: "/about" },
   ];
 
   const handleSignOut = async () => {
