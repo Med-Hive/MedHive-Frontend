@@ -1,6 +1,7 @@
 // src/app/admin/dashboard/components/columns.tsx
 
 //@ts-nocheck
+"use client";
 import { ColumnDef } from "@tanstack/react-table"
 import { ExperimentRun } from "@/types"
 import { Badge } from "@/components/ui/badge"

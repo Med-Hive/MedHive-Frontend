@@ -121,7 +121,7 @@ export default function Models() {
     setModels(prevModels => {
       const newModels = prevModels.map(model =>
         model.id === modelId
-          ? { ...model, status: "training" as const }
+          ? { ...model, status: "pending" as const }
           : model
       ).sort((a, b) => {
         if (a.status === 'training') return -1;
@@ -141,12 +141,6 @@ export default function Models() {
   const filteredModels = selectedTab === "all"
     ? models
     : models.filter(m => m.status === selectedTab);
-
-  useEffect(() => {
-    if (!(sessionData.sessionData.userprofile?.role === "admin")) {
-      router.back();
-    }
-  }, []);
 
   useEffect(() => {
     setIsLoaded(true);

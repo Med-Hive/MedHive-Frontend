@@ -1,5 +1,3 @@
-// src/app/admin/dashboard/page.tsx
-
 "use client";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
@@ -37,7 +35,6 @@ import { columns } from "./components/columns";
 import { ClusterMap } from "./components/cluster-map";
 import { AnimatedNumber } from "./components/animated-number";
 import { SessionContext } from "@/utils/supabase/usercontext";
-import {toast} from "sonner";
 
 const CYBER_COLORS = ["#00f2fe", "#4facfe", "#8e44ad", "#ff6b6b", "#1dd1a1"];
 const GLOW_STYLES = { boxShadow: "0 0 15px rgba(0, 242, 254, 0.3)" };
@@ -73,10 +70,8 @@ const generateNodeStatus = (count: number): NodeStatus[] =>
   }));
 
 export default function AdminDashboard() {
-  const [experimentRuns] = useState<ExperimentRun[]>(
-    generateExperimentRuns(15)
-  );
-  const [nodeStatus] = useState<NodeStatus[]>(generateNodeStatus(12));
+  const [experimentRuns, setExperimentRuns] = useState<ExperimentRun[]>([]);
+  const [nodes, setNodes] = useState<NodeStatus[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionData = useContext(SessionContext);
   const router = useRouter();
@@ -147,16 +142,11 @@ export default function AdminDashboard() {
     setTimeout(() => setAggregationStatus("idle"), 5000);
   };
 
-  useEffect(()=>{
-    if (!(sessionData.sessionData.userprofile?.role === "admin")) {
-      router.back();
-      alert("Sorry. You don't have access to that page");
-    }
-  },[]);
-
   useEffect(() => {
     setIsLoaded(true);
-    }, []);
+    setExperimentRuns(generateExperimentRuns(10));
+    setNodes(generateNodeStatus(8));
+  }, []);
 
   return (
     <main
@@ -394,7 +384,7 @@ export default function AdminDashboard() {
           </CardTitle>
         </CardHeader>
         <CardContent className="h-96">
-          <ClusterMap nodes={nodeStatus} />
+          <ClusterMap nodes={nodes} />
         </CardContent>
       </CyberCard>
     </div>

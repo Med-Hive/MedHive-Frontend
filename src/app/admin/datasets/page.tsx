@@ -119,12 +119,6 @@ export default function Datasets() {
     : datasets.filter(d => d.status === selectedTab);
 
   useEffect(() => {
-    if (!(sessionData.sessionData.userprofile?.role === "admin")) {  
-      router.back();
-    }
-  }, []);
-
-  useEffect(() => {
     setIsLoaded(true);
   }, []);
 
