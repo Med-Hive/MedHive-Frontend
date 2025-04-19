@@ -19,9 +19,9 @@ export default function About() {
 
   const pricing = [
     {
-      title: "IDK",
+      title: "Free Tier",
       description:
-      "a lot of somethings",
+      "One or two models can be used for a limited time",
         },
     {
       title: "Usage Limitations in Free Plan",
