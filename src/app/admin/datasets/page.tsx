@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Circle } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Navbar } from "@/components/layout/Navbar";
 
 type Dataset = {
   id: string;
@@ -36,6 +37,7 @@ const CyberCard = ({ className, ...props }: any) => (
 );
 
 export default function Datasets() {
+  const [isLoaded, setIsLoaded]=useState(false);
   const [datasets, setDatasets] = useState<Dataset[]>([
     {
       id: "1",
@@ -113,7 +115,17 @@ export default function Datasets() {
     ? datasets 
     : datasets.filter(d => d.status === selectedTab);
 
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
+        <main
+        className={`min-h-screen ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        } transition-opacity duration-500`}
+      >
+        <Navbar />
     <div className="min-h-screen bg-black p-4 sm:p-6 lg:p-8 font-mono space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -228,5 +240,6 @@ export default function Datasets() {
         </CardContent>
       </CyberCard>
     </div>
+    </main>
   );
 }

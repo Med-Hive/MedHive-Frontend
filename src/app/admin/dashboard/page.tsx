@@ -1,7 +1,7 @@
 // src/app/admin/dashboard/page.tsx
 
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   LineChart,
@@ -20,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Navbar } from "@/components/layout/Navbar";
 import {
   BrainCircuit,
   CircuitBoard,
@@ -73,6 +74,7 @@ export default function AdminDashboard() {
     generateExperimentRuns(15)
   );
   const [nodeStatus] = useState<NodeStatus[]>(generateNodeStatus(12));
+  const [isLoaded, setIsLoaded] = useState(false);
   const [selectedTab, setSelectedTab] = useState("overview");
   const [aggregationStatus, setAggregationStatus] = useState<
     "idle" | "aggregating" | "completed"
@@ -139,6 +141,11 @@ export default function AdminDashboard() {
     setAggregationStatus("completed");
     setTimeout(() => setAggregationStatus("idle"), 5000);
   };
+
+
+  useEffect(() => {
+    setIsLoaded(true);
+    }, []);
 
   return (
     <div className="min-h-screen bg-black p-4 sm:p-6 lg:p-8 font-mono space-y-8">
@@ -335,16 +342,15 @@ export default function AdminDashboard() {
                     aggregationStatus === "idle"
                       ? 0
                       : aggregationStatus === "aggregating"
-                      ? 50
-                      : 100
+                        ? 50
+                        : 100
                   }
-                  className={`h-2 bg-black/50 ${
-                    aggregationStatus === "aggregating"
-                      ? "animate-pulse bg-cyan-500"
-                      : aggregationStatus === "completed"
+                  className={`h-2 bg-black/50 ${aggregationStatus === "aggregating"
+                    ? "animate-pulse bg-cyan-500"
+                    : aggregationStatus === "completed"
                       ? "bg-green-500"
                       : "bg-black/50"
-                  }`}
+                    }`}
                 />
               </div>
               <Button
@@ -356,8 +362,8 @@ export default function AdminDashboard() {
                 {aggregationStatus === "idle"
                   ? "Initialize Aggregation"
                   : aggregationStatus === "aggregating"
-                  ? "Aggregating..."
-                  : "Completed"}
+                    ? "Aggregating..."
+                    : "Completed"}
               </Button>
             </CardContent>
           </CyberCard>

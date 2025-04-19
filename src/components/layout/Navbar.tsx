@@ -59,6 +59,9 @@ export function Navbar() {
     { name: "MODEL HUB", path: "/model-hub" },
     { name: "CONTRIBUTE", path: "/contribute" },
     { name: "ABOUT", path: "/about" },
+    ...(sessionData.sessionData.userprofile?.role === "admin"
+      ? [{ name: "DASHBOARD", path: "/admin/dashboard" }]
+      : []),
   ];
 
   const handleSignOut = async () => {
