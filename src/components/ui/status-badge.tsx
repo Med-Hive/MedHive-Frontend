@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { IconType } from "@remixicon/react"
+import { IconBaseProps } from "react-icons"
 
 const statusBadgeVariants = cva(
   "inline-flex items-center gap-x-2 rounded-full px-2 py-1 backdrop-blur-md bg-black/40 border border-white/10 text-sm",
@@ -22,8 +22,8 @@ const statusBadgeVariants = cva(
 interface StatusBadgeProps
   extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof statusBadgeVariants> {
-  leftIcon?: IconType
-  rightIcon?: IconType
+  leftIcon?: React.ComponentType<IconBaseProps>
+  rightIcon?: React.ComponentType<IconBaseProps>
   leftLabel: string
   rightLabel: string
 }
