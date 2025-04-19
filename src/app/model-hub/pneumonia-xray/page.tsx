@@ -27,7 +27,7 @@ type FormValues = {
 
 export default function PneumoniaXrayPredictionPage() {
   const [prediction, setPrediction] = useState<{
-    prediction: string;
+    diagnosis: string;
     probability: number;
     timestamp: number;
   } | null>(null);
@@ -177,7 +177,7 @@ export default function PneumoniaXrayPredictionPage() {
               <AlertDescription className="text-gray-200">
                 <div className="mt-2 text-gray-200 space-y-1 font-['Poppins']">
                   <p>
-                    <strong>Diagnosis:</strong> {prediction.prediction}
+                    <strong>Diagnosis:</strong> {prediction.diagnosis}
                   </p>
                   <p>
                     <strong>Confidence:</strong>{" "}
