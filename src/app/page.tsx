@@ -172,22 +172,22 @@ export default function Index() {
                   <div className="lg:w-7/12 text-center lg:text-left">
                     <div className="flex flex-wrap justify-center sm:justify-start gap-3 mb-6">
                       <StatusBadge
-                        leftIcon={RiShieldCheckLine}
-                        rightIcon={RiLock2Line}
+                        leftIcon={() => <RiShieldCheckLine />}
+                        rightIcon={()=><RiLock2Line/>}
                         leftLabel="Privacy"
                         rightLabel="On‑Premise"
                         status="success"
                       />
                       <StatusBadge
-                        leftIcon={RiLock2Line}
-                        rightIcon={RiGroupLine}
+                        leftIcon={() => <RiShieldCheckLine />}
+                        rightIcon={()=><RiLock2Line/>}
                         leftLabel="Secure"
                         rightLabel="Federated AI"
                         status="success"
                       />
                       <StatusBadge
-                        leftIcon={RiShieldCheckLine}
-                        rightIcon={RiLock2Line}
+                        leftIcon={() => <RiShieldCheckLine />}
+                        rightIcon={()=><RiLock2Line/>}
                         leftLabel="End‑to‑End"
                         rightLabel="Encryption"
                         status="success"
