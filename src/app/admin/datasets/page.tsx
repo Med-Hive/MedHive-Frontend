@@ -21,24 +21,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Navbar } from "@/components/layout/Navbar";
 import { useRouter } from "next/navigation";
 
-type Dataset = {
-  id: string;
-  name: string;
-  description: string;
-  data_provider: string;
-  size_bytes: number;
-  num_samples: number;
-  data_type: string;
-  metadata: any;
-  status: "pending" | "approved";
-  updated_at: string;
-};
-
-const CyberCard = ({ className, ...props }: any) => (
-  <Card className={`bg-black/50 border ${className}`} {...props} />
-);
-
 export default function Datasets() {
+  type Dataset = {
+    id: string;
+    name: string;
+    description: string;
+    data_provider: string;
+    size_bytes: number;
+    num_samples: number;
+    data_type: string;
+    metadata: any;
+    status: "pending" | "approved";
+    updated_at: string;
+  };
+  
+  const CyberCard = ({ className, ...props }: any) => (
+    <Card className={`bg-black/50 border ${className}`} {...props} />
+  );
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionData = useContext(SessionContext);
   const router = useRouter();
@@ -118,13 +117,6 @@ export default function Datasets() {
   const filteredDatasets = selectedTab === "all"
     ? datasets
     : datasets.filter(d => d.status === selectedTab);
-
-  useEffect(() => {
-    if (!(sessionData.sessionData.userprofile?.role === "admin")) {  
-      router.back();
-      alert("Sorry. You don't have access to that page");
-    }
-  }, []);
 
   useEffect(() => {
     setIsLoaded(true);

@@ -20,22 +20,22 @@ import { Navbar } from "@/components/layout/Navbar";
 import { useRouter } from "next/navigation";
 import { SessionContext } from "@/utils/supabase/usercontext";
 
-type Model = {
-  id: string;
-  name: string;
-  status: "trained" | "training" | "pending";
-  accuracy?: number;
-  f1_score?: number;
-  precision_score?: number;
-  recall_score?: number;
-  updated_at: string;
-};
-
-const CyberCard = ({ className, ...props }: any) => (
-  <Card className={`bg-black/50 border ${className}`} {...props} />
-);
-
 export default function Models() {
+  type Model = {
+    id: string;
+    name: string;
+    status: "trained" | "training" | "pending";
+    accuracy?: number;
+    f1_score?: number;
+    precision_score?: number;
+    recall_score?: number;
+    updated_at: string;
+  };
+  
+  const CyberCard = ({ className, ...props }: any) => (
+    <Card className={`bg-black/50 border ${className}`} {...props} />
+  );
+  
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionData = useContext(SessionContext);
   const router = useRouter();
@@ -121,7 +121,7 @@ export default function Models() {
     setModels(prevModels => {
       const newModels = prevModels.map(model =>
         model.id === modelId
-          ? { ...model, status: "training" as const }
+          ? { ...model, status: "pending" as const }
           : model
       ).sort((a, b) => {
         if (a.status === 'training') return -1;
@@ -141,13 +141,6 @@ export default function Models() {
   const filteredModels = selectedTab === "all"
     ? models
     : models.filter(m => m.status === selectedTab);
-
-  useEffect(() => {
-    if (!(sessionData.sessionData.userprofile?.role === "admin")) {
-      router.back();
-      alert("Sorry. You don't have access to that page");
-    }
-  }, []);
 
   useEffect(() => {
     setIsLoaded(true);

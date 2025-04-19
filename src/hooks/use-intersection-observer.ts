@@ -11,7 +11,7 @@ export function useIntersectionObserver<T extends HTMLElement>({
   threshold = 0.1,
   rootMargin = "0px",
 }: UseIntersectionObserverProps = {}): RefObject<T> {
-  const elementRef = useRef<T>(null);
+  const elementRef = useRef<T>(null) as RefObject<T>;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
