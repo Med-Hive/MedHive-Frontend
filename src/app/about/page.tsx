@@ -20,18 +20,15 @@ export default function About() {
   const pricing = [
     {
       title: "Free Tier",
-      description:
-      "One or two models can be used for a limited time",
-        },
-    {
-      title: "Usage Limitations in Free Plan",
-      description:
-      "user needs to pay sooner or later",
+      description: "One or two models can be used for a limited time",
     },
     {
-      title: "Contributor Credits",
-      description:
-      "you help us, we give benefits...or something",
+      title: "Standard Tier",
+      description: "Pay as you go, with a monthly fee for each model",
+    },
+    {
+      title: "Enterprise Tier",
+      description: "Custom pricing for large institutions with multiple models",
     },
   ];
 
@@ -55,8 +52,9 @@ export default function About() {
 
   return (
     <main
-      className={`min-h-screen ${isLoaded ? "opacity-100" : "opacity-0"
-        } transition-opacity duration-500`}
+      className={`min-h-screen ${
+        isLoaded ? "opacity-100" : "opacity-0"
+      } transition-opacity duration-500`}
     >
       <Navbar />
 
@@ -257,12 +255,13 @@ border border-cyan-300/20
             <span className="inline-block px-3 py-1 bg-cyan-400/10 border border-cyan-400/20 text-white rounded-full text-sm font-['Lilita_One'] mb-4">
               Our Pricing Models
             </span>
-            <h2 className="text-4xl md:text-6xl font-['Kagitingan'] mb-6 bg-gradient-to-r from-cyan-400 via-blue-300 to-purple-400 bg-clip-text text-transparent"
-            >
-            Powering Progress Through Thoughtful Pricing
+            <h2 className="text-4xl md:text-6xl font-['Kagitingan'] mb-6 bg-gradient-to-r from-cyan-400 via-blue-300 to-purple-400 bg-clip-text text-transparent">
+              Powering Progress Through Thoughtful Pricing
             </h2>
             <p className="text-lg text-white font-['Poppins']">
-            Transparent, adaptable pricing that grows with your mission - thoughtfully structured to sustain both cutting-edge research and real-world impact
+              Transparent, adaptable pricing that grows with your mission -
+              thoughtfully structured to sustain both cutting-edge research and
+              real-world impact
             </p>
           </div>
 
