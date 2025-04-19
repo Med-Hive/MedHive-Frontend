@@ -235,7 +235,7 @@ border border-cyan-300/20
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl text-cyan-400 font-['Kagitingan']">
+                <h3 className="text-4xl md:text-4xl text-pink-400 font-['Kagitingan']">
                   {item.title}
                 </h3>
 
@@ -313,12 +313,12 @@ border border-cyan-300/20
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl text-cyan-400 font-['Kagitingan']">
+                <h3 className="text-2xl md:text-5xl text-pink-400 font-['Kagitingan']">
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white text-base leading-snug px-2 font-['Poppins']">
+                <p className="text-white  text-xl leading-snug px-2 font-['Poppins']">
                   {item.description}
                 </p>
               </BlurContainer>
