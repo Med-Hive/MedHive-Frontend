@@ -6,7 +6,8 @@ import "./globals.css";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import { SessionProvider } from "../utils/supabase/usercontext";
 import { Toaster } from "@/components/ui/sonner";
-
+import { CopilotKit } from "@copilotkit/react-core"; 
+import "@copilotkit/react-ui/styles.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,7 +36,9 @@ export default function RootLayout({
         </div>
         <div className="relative z-10">
           <SessionProvider>
-            {children}
+            <CopilotKit runtimeUrl="/api/copilotkit">
+              {children}
+            </CopilotKit>
           </SessionProvider>
         </div>
         <Toaster />
