@@ -1,7 +1,8 @@
 // src/app/admin/dashboard/page.tsx
 
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   LineChart,
@@ -35,6 +36,8 @@ import { DataTable } from "./components/data-table";
 import { columns } from "./components/columns";
 import { ClusterMap } from "./components/cluster-map";
 import { AnimatedNumber } from "./components/animated-number";
+import { SessionContext } from "@/utils/supabase/usercontext";
+import {toast} from "sonner";
 
 const CYBER_COLORS = ["#00f2fe", "#4facfe", "#8e44ad", "#ff6b6b", "#1dd1a1"];
 const GLOW_STYLES = { boxShadow: "0 0 15px rgba(0, 242, 254, 0.3)" };
@@ -75,6 +78,8 @@ export default function AdminDashboard() {
   );
   const [nodeStatus] = useState<NodeStatus[]>(generateNodeStatus(12));
   const [isLoaded, setIsLoaded] = useState(false);
+  const sessionData = useContext(SessionContext);
+  const router = useRouter();
   const [selectedTab, setSelectedTab] = useState("overview");
   const [aggregationStatus, setAggregationStatus] = useState<
     "idle" | "aggregating" | "completed"
@@ -142,12 +147,24 @@ export default function AdminDashboard() {
     setTimeout(() => setAggregationStatus("idle"), 5000);
   };
 
+  useEffect(()=>{
+    if (!(sessionData.sessionData.userprofile?.role === "admin")) {
+      router.back();
+      alert("Sorry. You don't have access to that page");
+    }
+  },[]);
 
   useEffect(() => {
     setIsLoaded(true);
     }, []);
 
   return (
+    <main
+    className={`min-h-screen ${
+      isLoaded ? "opacity-100" : "opacity-0"
+    } transition-opacity duration-500`}
+  >
+    <Navbar />
     <div className="min-h-screen bg-black p-4 sm:p-6 lg:p-8 font-mono space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -381,6 +398,7 @@ export default function AdminDashboard() {
         </CardContent>
       </CyberCard>
     </div>
+    </main>
   );
 }
 

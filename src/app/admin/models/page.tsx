@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Circle, BrainCircuit } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
@@ -17,6 +17,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Navbar } from "@/components/layout/Navbar";
+import { useRouter } from "next/navigation";
+import { SessionContext } from "@/utils/supabase/usercontext";
 
 type Model = {
   id: string;
@@ -35,6 +37,8 @@ const CyberCard = ({ className, ...props }: any) => (
 
 export default function Models() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const sessionData = useContext(SessionContext);
+  const router = useRouter();
   const [models, setModels] = useState<Model[]>([
     {
       id: "1",
@@ -139,9 +143,15 @@ export default function Models() {
     : models.filter(m => m.status === selectedTab);
 
   useEffect(() => {
-    setIsLoaded(true);
+    if (!(sessionData.sessionData.userprofile?.role === "admin")) {
+      router.back();
+      alert("Sorry. You don't have access to that page");
+    }
   }, []);
 
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   return (
     <main
