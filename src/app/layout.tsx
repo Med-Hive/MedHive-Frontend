@@ -8,6 +8,7 @@ import { SessionProvider } from "../utils/supabase/usercontext";
 import { Toaster } from "@/components/ui/sonner";
 import { CopilotKit } from "@copilotkit/react-core"; 
 import "@copilotkit/react-ui/styles.css";
+import { CopilotManager } from "@/components/copilot";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,6 +29,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -38,6 +42,7 @@ export default function RootLayout({
           <SessionProvider>
             <CopilotKit runtimeUrl="/api/copilotkit">
               {children}
+              <CopilotManager/>
             </CopilotKit>
           </SessionProvider>
         </div>
