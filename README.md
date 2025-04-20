@@ -73,7 +73,7 @@ Clinicians and patients also expect instantaneous AI-driven insights during cons
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-org/MedHive.git
+   git clone https://github.com/Med-Hive/MedHive-Frontend.git
    cd MedHive
    ```
 2. **Configure your environment**:
