@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import { Toaster, toast } from "sonner";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
@@ -134,6 +135,12 @@ export default function ModelHub() {
     });
   }, [models, debouncedSearch, activeCategory]);
 
+  const comingSoonModels = [
+    "ecg-analysis",
+    "glaucoma-fundus",
+    "health-predictor",
+  ];
+
   return (
     <main
       className={`min-h-screen ${
@@ -141,6 +148,19 @@ export default function ModelHub() {
       } transition-opacity duration-500`}
     >
       <Navbar />
+      <Toaster
+        position="top-center"
+        expand={false}
+        theme="dark"
+        toastOptions={{
+          classNames: {
+            toast:
+              "!bg-[linear-gradient(152deg,#0F172A_45%,#1E293B)] !border-[0.5px] !border-cyan-300/20 !rounded-lg !shadow-[0_0_30px_rgba(34,211,238,0.3)] !font-['Poppins']",
+            title: "!text-cyan-200 !font-semibold !text-lg",
+            description: "!text-cyan-100 !text-sm",
+          },
+        }}
+      />
 
       {/* Hero Section */}
       <section className="pt-10 pb-16">
@@ -213,50 +233,104 @@ export default function ModelHub() {
         <div className="container mx-auto px-4">
           {filteredModels.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredModels.map((m, i) => (
-                <Link
-                  href={`/model-hub/${m.id}`}
-                  key={m.id}
-                  className="group relative block overflow-hidden rounded-2xl border border-transparent bg-gradient-to-br from-gray-900 via-black to-gray-800 shadow-[0_10px_30px_rgba(0,255,255,0.2)] hover:shadow-[0_10px_30px_rgba(0,255,255,0.5)] transition-shadow duration-500 animate-fade-up"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <div className="h-48 overflow-hidden rounded-t-2xl">
-                    <img
-                      src={m.image}
-                      alt={m.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-center mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-black/30 rounded-full backdrop-blur-sm">
-                          {m.icon}
+              {filteredModels.map((m, i) => {
+                const isComingSoon = comingSoonModels.includes(m.id);
+
+                return isComingSoon ? (
+                  <div
+                    key={m.id}
+                    onClick={() =>
+                      toast("Coming soon!", {
+                        description: "This model is currently in development",
+                        position: "top-center",
+                      })
+                    }
+                    className="group relative block overflow-hidden rounded-2xl border border-transparent bg-gradient-to-br from-gray-900 via-black to-gray-800 shadow-[0_10px_30px_rgba(0,255,255,0.2)] hover:shadow-[0_10px_30px_rgba(0,255,255,0.5)] transition-shadow duration-500 animate-fade-up cursor-pointer"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="h-48 overflow-hidden rounded-t-2xl">
+                      <img
+                        src={m.image}
+                        alt={m.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-black/30 rounded-full backdrop-blur-sm">
+                            {m.icon}
+                          </div>
+                          <h3 className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                            {m.title}
+                          </h3>
                         </div>
-                        <h3 className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-colors">
-                          {m.title}
-                        </h3>
+                        <span className="px-2 py-1 bg-green-700 text-green-300 rounded-full text-xs font-medium">
+                          {m.accuracy}
+                        </span>
                       </div>
-                      <span className="px-2 py-1 bg-green-700 text-green-300 rounded-full text-xs font-medium">
-                        {m.accuracy}
-                      </span>
-                    </div>
-                    <p className="text-gray-400 text-sm line-clamp-3 mb-4">
-                      {m.description}
-                    </p>
-                    <div className="flex justify-between text-xs text-gray-500">
-                      <span>{m.contributors} Contributors</span>
-                      <span>Updated {m.lastUpdated}</span>
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
-                      <span className="text-xs text-cyan-400 uppercase">
-                        {categories.find((c) => c.id === m.category)?.name}
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-cyan-400 transition-transform group-hover:translate-x-1" />
+                      <p className="text-gray-400 text-sm line-clamp-3 mb-4">
+                        {m.description}
+                      </p>
+                      <div className="flex justify-between text-xs text-gray-500">
+                        <span>{m.contributors} Contributors</span>
+                        <span>Updated {m.lastUpdated}</span>
+                      </div>
+                      <div className="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <span className="text-xs text-cyan-400 uppercase">
+                          {categories.find((c) => c.id === m.category)?.name}
+                        </span>
+                        <ArrowRight className="h-4 w-4 text-cyan-400 transition-transform group-hover:translate-x-1" />
+                      </div>
                     </div>
                   </div>
-                </Link>
-              ))}
+                ) : (
+                  <Link
+                    href={`/model-hub/${m.id}`}
+                    key={m.id}
+                    className="group relative block overflow-hidden rounded-2xl border border-transparent bg-gradient-to-br from-gray-900 via-black to-gray-800 shadow-[0_10px_30px_rgba(0,255,255,0.2)] hover:shadow-[0_10px_30px_rgba(0,255,255,0.5)] transition-shadow duration-500 animate-fade-up"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  >
+                    <div className="h-48 overflow-hidden rounded-t-2xl">
+                      <img
+                        src={m.image}
+                        alt={m.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-black/30 rounded-full backdrop-blur-sm">
+                            {m.icon}
+                          </div>
+                          <h3 className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                            {m.title}
+                          </h3>
+                        </div>
+                        <span className="px-2 py-1 bg-green-700 text-green-300 rounded-full text-xs font-medium">
+                          {m.accuracy}
+                        </span>
+                      </div>
+                      <p className="text-gray-400 text-sm line-clamp-3 mb-4">
+                        {m.description}
+                      </p>
+                      <div className="flex justify-between text-xs text-gray-500">
+                        <span>{m.contributors} Contributors</span>
+                        <span>Updated {m.lastUpdated}</span>
+                      </div>
+                      <div className="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <span className="text-xs text-cyan-400 uppercase">
+                          {categories.find((c) => c.id === m.category)?.name}
+                        </span>
+                        <ArrowRight className="h-4 w-4 text-cyan-400 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-20 text-gray-500">

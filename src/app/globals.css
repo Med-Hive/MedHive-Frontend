@@ -53,7 +53,7 @@
     --copilot-kit-separator-color: rgba(0, 0, 0, 0.08);
     --copilot-kit-scrollbar-color: rgba(0, 0, 0, 0.2);
     --copilot-kit-response-button-color: #333;
-    --copilot-kit-response-button-background-color: #fff
+    --copilot-kit-response-button-background-color: #fff;
   }
 
   .dark {
@@ -310,16 +310,25 @@ canvas {
 }
 
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
 }
 
 .animate-scanline {
   animation: scanline 3s linear infinite;
 }
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .animate-pulse {
@@ -356,14 +365,25 @@ canvas {
 }
 
 @keyframes cyber-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes node-glow {
-  0% { filter: drop-shadow(0 0 5px #00f2fe); }
-  50% { filter: drop-shadow(0 0 15px #00f2fe); }
-  100% { filter: drop-shadow(0 0 5px #00f2fe); }
+  0% {
+    filter: drop-shadow(0 0 5px #00f2fe);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #00f2fe);
+  }
+  100% {
+    filter: drop-shadow(0 0 5px #00f2fe);
+  }
 }
 
 .cyber-pulse {
@@ -375,8 +395,13 @@ canvas {
 }
 
 @keyframes neon-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .neon-text {
