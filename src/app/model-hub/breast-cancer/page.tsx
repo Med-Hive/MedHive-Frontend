@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2, Upload } from "lucide-react";
 
 type FormValues = {
   radius_mean: number;
@@ -99,6 +99,36 @@ export default function BreastCancerPredictionPage() {
     },
   });
 
+  const handleCSVUpload = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      if (lines.length < 2) throw new Error('CSV file is empty');
+
+      const headers = lines[0].trim().split(',');
+      const values = lines[1].trim().split(',');
+
+      const data: Partial<FormValues> = {};
+      headers.forEach((header, index) => {
+        const cleanHeader = header.trim().toLowerCase().replace(/["\s]/g, '_');
+        if (cleanHeader in form.getValues()) {
+          data[cleanHeader as keyof FormValues] = parseFloat(values[index]);
+        }
+      });
+
+      form.reset(data as FormValues);
+      setError(null);
+    } catch (err) {
+      setError('Error parsing CSV file. Please ensure it matches the required format.');
+    }
+
+    // Reset the input value so the same file can be uploaded again
+    event.target.value = '';
+  }, [form]);
+
   async function onSubmit(values: FormValues) {
     try {
       setError(null);
@@ -131,11 +161,29 @@ export default function BreastCancerPredictionPage() {
     <div className="container mx-auto py-12 px-4">
       <Card className="bg-gradient-to-br from-zinc-900/60 to-black/80 border border-cyan-500/20 shadow-lg backdrop-blur-lg rounded-3xl">
         <CardHeader>
-          <CardTitle className="text-4xl font-['Poppins'] text-cyan-400 drop-shadow-md">
-            Breast Cancer Prediction
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-4xl font-['Poppins'] text-cyan-400 drop-shadow-md">
+              Breast Cancer Prediction
+            </CardTitle>
+            <div className="relative">
+              <Input
+                type="file"
+                accept=".csv"
+                onChange={handleCSVUpload}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                title="Upload CSV"
+              />
+              <Button
+                variant="outline"
+                className="bg-transparent border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 transition-all duration-200"
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                Upload CSV
+              </Button>
+            </div>
+          </div>
           <CardDescription className="text-gray-400 mt-1 font-['Poppins']">
-            Enter the tumor characteristics to get a prediction.
+            Enter the tumor characteristics to get a prediction, or upload a CSV file with the data.
           </CardDescription>
         </CardHeader>
 
