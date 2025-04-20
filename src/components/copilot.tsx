@@ -179,7 +179,7 @@ export function CopilotManager({}: CopilotManagerProps) {
           title: "Med-Aid AI",
           initial: `Hello ${userprofile?.full_name || "there"}, How can I help you today?`,
         }}
-        className="rounded-full overflow-visible bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 shadow-lg hover:shadow-xl transition-all duration-300"
+        className="rounded-full overflow-visible bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
       />
     </motion.div>
   );

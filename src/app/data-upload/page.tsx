@@ -105,25 +105,36 @@ accept=".json,.csv,.txt"
 </motion.div>
 
 <motion.div
-initial={{ x: 50, opacity: 0 }}
-animate={{ x: 0, opacity: 1 }}
-transition={{ duration: 0.6, delay: 0.5 }}
-className="h-full bg-black/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/20 shadow-lg"
->
-<CopilotChat
-className="h-full font-['Poppins']"
-instructions={`You are assisting the user as best as you can. Answer in the best way possible given the data you have. ${
-context
-? "You have been provided with the following data: " + context
-: ""
-}`}
-labels={{
-title: "Data Assistant",
-initial:
-"Hi! 👋 Upload a file (JSON, CSV, or TXT) and I'll help you analyze it.",
-}}
-/>
-</motion.div>
+      initial={{ x: 50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.5 }}
+      className="
+        h-full
+        bg-black/50
+        bg-opacity-50
+        backdrop-blur-xl
+        rounded-2xl
+        overflow-hidden
+        border border-white/20
+        shadow-lg
+        filter
+        invert
+      "
+    >
+      <CopilotChat
+        className="h-full font-['Poppins']"
+        instructions={`You are assisting the user as best as you can. Answer in the best way possible given the data you have. ${
+          context
+            ? "You have been provided with the following data: " + context
+            : ""
+        }`}
+        labels={{
+          title: "Data Assistant",
+          initial:
+            "Hi! 👋 Upload a file (JSON, CSV, or TXT) and I'll help you analyze it.",
+        }}
+      />
+    </motion.div>
 </motion.div>
 </div>
 );
