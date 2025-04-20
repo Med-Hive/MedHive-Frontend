@@ -364,18 +364,6 @@ border border-cyan-300/20
                         info@medhive.ai
                       </a>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-white mb-1 font-['Poppins']">
-                        Visit Our Office
-                      </h3>
-                      <address className="not-italic text-white text-sm leading-relaxed">
-                        123 Innovation Drive
-                        <br />
-                        Suite 400
-                        <br />
-                        San Francisco, CA 94107
-                      </address>
-                    </div>
                   </div>
 
                   <Button className="relative inline-flex items-center px-6 py-3 font-['Lilita_One'] text-base bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.6)] transition-all duration-300">

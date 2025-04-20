@@ -25,9 +25,11 @@ import {
   Cpu,
 } from "lucide-react";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { useRouter } from "next/navigation";
 
 export default function Contribute() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -209,7 +211,7 @@ export default function Contribute() {
             </p>
 
             <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
-              <InteractiveHoverButton className="text-lg hover:text-2xl">
+              <InteractiveHoverButton className="text-lg hover:text-2xl"  onClick={()=>router.push("/login")}>
                 <ArrowRight className="ml-2 h-5 w-5" />
               </InteractiveHoverButton>
             </motion.div>
@@ -319,8 +321,9 @@ export default function Contribute() {
                     ))}
                   </div>
 
-                  <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-3 py-3 rounded-lg font-semibold shadow-glow-sm border border-cyan-500/30 text-base font-['Poppins'] transition-all duration-300">
-                    Register as Hospital
+                  <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-3 py-3 rounded-lg font-semibold shadow-glow-sm border border-cyan-500/30 text-base font-['Poppins'] transition-all duration-300"
+                    onClick={()=>router.push("/data-upload")}>
+                      Proceed to provide data
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </motion.div>
@@ -500,6 +503,7 @@ export default function Contribute() {
                     </h3>
                     <Button
                       variant="outline"
+                      onClick={()=>router.push("/login")}
                       className="px-6 py-4 rounded-lg border-purple-400 text-purple-800 text-base font-['Lilita_One'] hover:bg-purple-400/10 hover:text-white transition-all duration-300"
                     >
                       <Lock className="mr-0.5 h-4 w-4" />
